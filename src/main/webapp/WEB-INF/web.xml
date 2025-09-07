@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+         https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    
+    <display-name>Email List Application</display-name>
+    
+    <context-param>
+        <param-name>custServEmail</param-name>
+        <param-value>custserv@murach.com</param-value>
+    </context-param>
+    
+    <!-- UTF-8 Encoding Filter -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignore</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>EmailList</servlet-name>
+        <servlet-class>com.murach.controller.EmailListServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EmailList</servlet-name>
+        <url-pattern>/emailList</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Disable scripting for security and best practices -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <scripting-invalid>true</scripting-invalid>
+        </jsp-property-group>
+    </jsp-config>
+    
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>
